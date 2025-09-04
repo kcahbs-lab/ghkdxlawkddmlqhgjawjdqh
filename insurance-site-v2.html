@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>황팀장의 보험정보</title>
+  <meta name="description" content="보험 황팀장의 보험 안내 — 교통사고·질병사고·상해사고 서류안내, 입원/통원 구분, 보험청구/상담 문의" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --blue: #2563eb;
+      --cyan: #06b6d4;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Arial, sans-serif; color:var(--text); background:var(--bg); }
+    a, button { cursor:pointer; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    header { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.85); backdrop-filter: blur(8px); border-bottom:1px solid var(--line); }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .badge { width:38px; height:38px; display:grid; place-items:center; border-radius:12px; color:#fff; background: linear-gradient(135deg, var(--blue), var(--cyan)); }
+    nav.menu { display:none; gap:8px; }
+    @media (min-width: 768px) { nav.menu { display:flex; } }
+    nav.menu button { border:0; background:transparent; padding:8px 12px; border-radius:10px; font-size:14px; color:#334155; }
+    nav.menu button.active { background:#0f172a; color:#fff; }
+    nav.menu button:not(.active):hover { background:#f1f5f9; }
+    section { padding:56px 0; }
+    .hero { background: linear-gradient(135deg,#0b1220,#0b1220 30%, #0f172a 100%); color:#fff; border-bottom:1px solid var(--line); }
+    .hero-grid { display:grid; grid-template-columns:1fr; gap:32px; align-items:center; }
+    @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.15fr .85fr; } }
+    .phone-box { width:260px; height:260px; border-radius:28px; background: linear-gradient(135deg, var(--cyan), var(--blue)); padding:6px; margin:auto; }
+    .phone-screen { height:100%; border-radius:24px; display:grid; place-items:center; background: rgba(2,6,23,.7); }
+    .phone-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .tile { width:56px; height:56px; border-radius:12px; background: rgba(255,255,255,.12); }
+    .h1 { font-size:32px; font-weight:800; line-height:1.25; }
+    .h2 { font-size:28px; font-weight:800; }
+    .sub { color:var(--muted); }
+    .grid-3 { display:grid; gap:16px; grid-template-columns:1fr; }
+    @media (min-width: 720px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+    .card { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:20px; }
+    .chip { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:#f1f5f9; color:#334155; border:1px solid #e2e8f0; font-size:12px; }
+    .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:700; font-size:14px; border:0; }
+    .btn.dark { background:#0f172a; color:#fff; }
+    .btn.white { background:#fff; color:#0f172a; }
+    .btn.sky { background:#0ea5e9; color:#fff; }
+    .btns { display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+    .banner { color:#fff; border-bottom:1px solid var(--line); }
+    .banner-inner { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:32px 0; }
+    .tabs { display:inline-flex; gap:4px; padding:4px; background:#f1f5f9; border-radius:12px; border:1px solid #e2e8f0; }
+    .tabs button { border:0; background:transparent; padding:8px 14px; border-radius:10px; font-weight:600; color:#475569; }
+    .tabs button.active { background:#fff; box-shadow:0 2px 4px rgba(2,6,23,.08); color:#0f172a; }
+    .layout { display:grid; gap:16px; }
+    @media (min-width: 1024px) { .layout { grid-template-columns: 2fr 1fr; } }
+    .list { list-style:none; padding:0; margin:10px 0 0; }
+    .list li { display:flex; gap:10px; align-items:flex-start; }
+    .check { margin-top:3px; width:20px; height:20px; border-radius:999px; background:#0f172a; color:#fff; display:grid; place-items:center; font-size:12px; }
+    footer { border-top:1px solid var(--line); background:#fff; }
+    .footer-inner { display:flex; flex-direction:column; gap:10px; align-items:center; justify-content:space-between; padding:24px 0; color:#475569; }
+    @media (min-width: 680px) { .footer-inner { flex-direction:row; } }
+    .footer-links a { display:inline-block; padding:6px 8px; border-radius:8px; color:#334155; text-decoration:none; }
+    .footer-links a:hover { background:#f1f5f9; }
+    .hide { display:none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="badge">✓</div>
+        <div>
+          <div style="font-weight:700;font-size:14px;">황팀장의 보험정보</div>
+          <div style="color:#64748b;font-size:12px;">보험 황팀장의 보험 안내</div>
+        </div>
+      </div>
+      <nav class="menu" id="menu">
+        <button data-go="home" class="active">메인</button>
+        <button data-go="traffic">교통사고</button>
+        <button data-go="disease">질병사고</button>
+        <button data-go="injury">상해사고</button>
+        <button data-go="claim">보험청구문의</button>
+        <button data-go="consult">보험상담문의</button>
+      </nav>
+    </div>
+  </header>
+
+  <section id="page-home">
+    <div class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1 class="h1">보험은 일상에 대한 대비입니다.</h1>
+          <p style="color:rgba(255,255,255,.85); margin-top:10px;">
+            아직도 보험 비갱신이 옳다 갱신이 옳다 고민이신가요? 맞춤 설계로 걱정을 줄이고,
+            위기에서도 일상을 복귀할 수 있도록 돕는 것이 보험의 역할입니다.
+          </p>
+          <div class="btns">
+            <button class="btn white">🔍 내 보험 내역 확인하기</button>
+            <button class="btn sky">🐷 숨은 포인트 및 보험금 찾기</button>
+          </div>
+        </div>
+        <div>
+          <div class="phone-box">
+            <div class="phone-screen">
+              <div class="phone-grid">
+                <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+                <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="container">
+        <h2 class="h2">보험에 대한 합리적인 선택</h2>
+        <p class="sub">보험은 많이 받는 것이 옳바른 보험이 아니라, 위기에서 일상으로 복귀할 수 있게 해주는 것입니다.</p>
+
+        <div class="grid-3" style="margin-top:16px;">
+          <div class="card"><div style="font-weight:700; font-size:18px;">⚡ 보험의 뼈대</div><div class="sub" style="margin-top:6px;">예상치 못한 질병·상해 시 필수적인 진단/입원 의료비를 해결할 기본 틀</div></div>
+          <div class="card"><div style="font-weight:700; font-size:18px;">🎁 보험의 보상</div><div class="sub" style="margin-top:6px;">진단비, 수술비, 재활비 등 회복 과정에 필요한 비용을 실질적으로 지원</div></div>
+          <div class="card"><div style="font-weight:700; font-size:18px;">🛡️ 보험의 책임</div><div class="sub" style="margin-top:6px;">타인에게 발생한 손해에 대한 배상책임을 대비하여 생활 위험을 전반적으로 관리</div></div>
+        </div>
+
+        <div class="chips">
+          <span class="chip">🚗 교통사고 서류 한눈에 보기</span>
+          <span class="chip">🩺 질병사고 청구 체크리스트</span>
+          <span class="chip">🩹 상해사고 입원/통원 구분 가이드</span>
+        </div>
+
+        <div class="btns">
+          <button class="btn dark" data-go="traffic">교통사고 바로가기</button>
+          <button class="btn dark" data-go="disease">질병사고 바로가기</button>
+          <button class="btn dark" data-go="injury">상해사고 바로가기</button>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section id="page-traffic" class="hide">
+    <div class="banner" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4)">
+      <div class="container banner-inner">
+        <div><div class="sub" style="color:#fff;opacity:.9;letter-spacing:.2em;">서류 안내</div><h1 class="h2" style="color:#fff;">교통사고</h1><div style="opacity:.9">상황에 맞게 입원·통원 서류를 구분해 준비하세요.</div></div>
+        <span class="chip" style="background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.25)">📄 청구 절차: 접수 → 심사 → 지급</span>
+      </div>
+    </div>
+    <section>
+      <div class="container">
+        <div class="h2" style="font-size:24px;">서류 안내</div>
+        <p class="sub">아래 목록은 일반적인 예시이며, 실제 청구 시 보험사/상품에 따라 추가 서류가 필요할 수 있습니다.</p>
+        <div class="tabs" data-tabs="traffic"><button class="active" data-tab="in">입원진료</button><button data-tab="out">통원진료</button></div>
+        <div class="layout" style="margin-top:16px;">
+          <div class="card"><div style="font-weight:700; font-size:18px;">제출 서류</div><ul class="list" id="traffic-list"></ul></div>
+          <aside class="card"><div style="font-weight:700;">TIP</div><ul class="sub" style="margin:8px 0 0 18px;"><li>원본 영수증은 스캔/촬영 전에 사본을 보관해두세요.</li><li>입원·수술 시 <b>진료비 계산서</b>와 <b>진료세부내역서</b>를 함께 준비하세요.</li><li>사고성(교통/상해)은 <b>사고확인서·경위서</b>가 추가됩니다.</li></ul></aside>
+        </div>
+        <div class="card" style="margin-top:16px;"><div style="font-weight:700;">청구 절차</div><div class="grid-3" style="grid-template-columns:repeat(5,1fr);"><div class="chip">1. 사고/진단 발생</div><div class="chip">2. 서류 준비</div><div class="chip">3. 접수</div><div class="chip">4. 심사</div><div class="chip">5. 지급</div></div></div>
+      </div>
+    </section>
+  </section>
+
+  <section id="page-disease" class="hide">
+    <div class="banner" style="background:linear-gradient(135deg,#10b981,#0d9488)">
+      <div class="container banner-inner">
+        <div><div class="sub" style="color:#fff;opacity:.9;letter-spacing:.2em;">서류 안내</div><h1 class="h2" style="color:#fff;">질병사고</h1><div style="opacity:.9">상황에 맞게 입원·통원 서류를 구분해 준비하세요.</div></div>
+        <span class="chip" style="background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.25)">📄 청구 절차: 접수 → 심사 → 지급</span>
+      </div>
+    </div>
+    <section>
+      <div class="container">
+        <div class="h2" style="font-size:24px;">서류 안내</div>
+        <p class="sub">아래 목록은 일반적인 예시이며, 실제 청구 시 보험사/상품에 따라 추가 서류가 필요할 수 있습니다.</p>
+        <div class="tabs" data-tabs="disease"><button class="active" data-tab="in">입원진료</button><button data-tab="out">통원진료</button></div>
+        <div class="layout" style="margin-top:16px;">
+          <div class="card"><div style="font-weight:700; font-size:18px;">제출 서류</div><ul class="list" id="disease-list"></ul></div>
+          <aside class="card"><div style="font-weight:700;">TIP</div><ul class="sub" style="margin:8px 0 0 18px;"><li>원본 영수증은 스캔/촬영 전에 사본을 보관해두세요.</li><li>입원·수술 시 <b>진료비 계산서</b>와 <b>진료세부내역서</b>를 함께 준비하세요.</li><li>사고성(교통/상해)은 <b>사고확인서·경위서</b>가 추가됩니다.</li></ul></aside>
+        </div>
+        <div class="card" style="margin-top:16px;"><div style="font-weight:700;">청구 절차</div><div class="grid-3" style="grid-template-columns:repeat(5,1fr);"><div class="chip">1. 사고/진단 발생</div><div class="chip">2. 서류 준비</div><div class="chip">3. 접수</div><div class="chip">4. 심사</div><div class="chip">5. 지급</div></div></div>
+      </div>
+    </section>
+  </section>
+
+  <section id="page-injury" class="hide">
+    <div class="banner" style="background:linear-gradient(135deg,#4f46e5,#2563eb)">
+      <div class="container banner-inner">
+        <div><div class="sub" style="color:#fff;opacity:.9;letter-spacing:.2em;">서류 안내</div><h1 class="h2" style="color:#fff;">상해사고</h1><div style="opacity:.9">상황에 맞게 입원·통원 서류를 구분해 준비하세요.</div></div>
+        <span class="chip" style="background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.25)">📄 청구 절차: 접수 → 심사 → 지급</span>
+      </div>
+    </div>
+    <section>
+      <div class="container">
+        <div class="h2" style="font-size:24px;">서류 안내</div>
+        <p class="sub">아래 목록은 일반적인 예시이며, 실제 청구 시 보험사/상품에 따라 추가 서류가 필요할 수 있습니다.</p>
+        <div class="tabs" data-tabs="injury"><button class="active" data-tab="in">입원진료</button><button data-tab="out">통원진료</button></div>
+        <div class="layout" style="margin-top:16px;">
+          <div class="card"><div style="font-weight:700; font-size:18px;">제출 서류</div><ul class="list" id="injury-list"></ul></div>
+          <aside class="card"><div style="font-weight:700;">TIP</div><ul class="sub" style="margin:8px 0 0 18px;"><li>원본 영수증은 스캔/촬영 전에 사본을 보관해두세요.</li><li>입원·수술 시 <b>진료비 계산서</b>와 <b>진료세부내역서</b>를 함께 준비하세요.</li><li>사고성(교통/상해)은 <b>사고확인서·경위서</b>가 추가됩니다.</li></ul></aside>
+        </div>
+        <div class="card" style="margin-top:16px;"><div style="font-weight:700;">청구 절차</div><div class="grid-3" style="grid-template-columns:repeat(5,1fr);"><div class="chip">1. 사고/진단 발생</div><div class="chip">2. 서류 준비</div><div class="chip">3. 접수</div><div class="chip">4. 심사</div><div class="chip">5. 지급</div></div></div>
+      </div>
+    </section>
+  </section>
+
+  <section id="page-claim" class="hide">
+    <div class="container">
+      <div class="h2">보험청구 문의</div>
+      <p class="sub">기본 Q&A와 절차를 확인한 뒤, 필요하면 상담을 요청하세요.</p>
+      <div class="grid-3" style="grid-template-columns:1fr; margin-top:10px;">
+        <details class="card"><summary>입원·수술 시 필수 서류는?</summary><p class="sub" style="margin-top:8px;">진단서(또는 수술확인서), 입퇴원확인서, 진료비 계산서(원본), 진료세부내역서가 기본입니다.</p></details>
+        <details class="card"><summary>교통사고일 때 추가 서류는?</summary><p class="sub" style="margin-top:8px;">사고사실확인원(경찰서 접수번호), 합의서(해당 시), 운전자보험의 경우 면허증 사본 등이 추가됩니다.</p></details>
+        <details class="card"><summary>진단비만 청구할 때도 진단서가 꼭 필요한가요?</summary><p class="sub" style="margin-top:8px;">대부분 진단비는 진단서 제출이 원칙입니다. 서류 대체 가능 여부는 상품 약관에 따릅니다.</p></details>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div style="font-weight:700;">청구 절차</div>
+        <div class="grid-3" style="grid-template-columns:repeat(5,1fr);"><div class="chip">1. 사고/진단 발생</div><div class="chip">2. 서류 준비</div><div class="chip">3. 접수</div><div class="chip">4. 심사</div><div class="chip">5. 지급</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-consult" class="hide">
+    <div class="container">
+      <div class="h2">보험상담 문의</div>
+      <p class="sub">간단한 정보를 남겨주시면 상담을 도와드립니다. (데모 폼)</p>
+      <div class="layout" style="margin-top:10px;">
+        <form class="card" id="consult-form">
+          <label style="display:block;margin-bottom:10px;"><div style="font-size:14px; font-weight:700; margin-bottom:6px;">이름 <b style="color:#dc2626">*</b></div><input required placeholder="성함" style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:12px; outline:none;"></label>
+          <label style="display:block;margin-bottom:10px;"><div style="font-size:14px; font-weight:700; margin-bottom:6px;">연락처 <b style="color:#dc2626">*</b></div><input required placeholder="010-0000-0000" style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:12px; outline:none;"></label>
+          <label style="display:block;margin-bottom:10px;"><div style="font-size:14px; font-weight:700; margin-bottom:6px;">이메일</div><input type="email" placeholder="you@example.com" style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:12px; outline:none;"></label>
+          <label style="display:block;margin-bottom:10px;"><div style="font-size:14px; font-weight:700; margin-bottom:6px;">상담 구분</div><select style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:12px;"><option>일반 상담</option><option>교통사고</option><option>질병사고</option><option>상해사고</option></select></label>
+          <label style="display:block;margin-bottom:10px;"><div style="font-size:14px; font-weight:700; margin-bottom:6px;">문의 내용 <b style="color:#dc2626">*</b></div><textarea required rows="6" placeholder="상담이 필요한 내용을 적어주세요." style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:12px; outline:none; resize:vertical;"></textarea></label>
+          <button class="btn dark" type="submit">💬 상담 요청 보내기 (데모)</button>
+          <div id="submit-msg" class="sub" style="margin-top:8px; color:#059669; display:none;">임시로 제출이 완료되었습니다. (콘솔 확인용)</div>
+        </form>
+        <aside class="card">
+          <div style="font-weight:700;">연락 채널</div>
+          <ul class="sub" style="margin-top:10px; list-style:none; padding:0;">
+            <li style="margin-bottom:6px;">🧑‍💼 담당자: <b>황병세</b></li>
+            <li style="margin-bottom:6px;">📞 010-6759-0327</li>
+            <li>✉️ your@email.com</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2025 황팀장의 보험정보</div>
+      <div class="footer-links"><a href="#claim">보험청구문의</a><a href="#consult">보험상담문의</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const pages = {
+      home: document.getElementById('page-home'),
+      traffic: document.getElementById('page-traffic'),
+      disease: document.getElementById('page-disease'),
+      injury: document.getElementById('page-injury'),
+      claim: document.getElementById('page-claim'),
+      consult: document.getElementById('page-consult'),
+    };
+    function go(key) {
+      Object.values(pages).forEach(el => el.classList.add('hide'));
+      (pages[key] || pages.home).classList.remove('hide');
+      document.querySelectorAll('nav.menu button').forEach(b => b.classList.toggle('active', b.dataset.go === key));
+      if (location.hash.replace('#','') !== key) location.hash = key;
+      window.scrollTo({ top: 0 });
+    }
+    document.getElementById('menu').addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-go]');
+      if (!b) return;
+      go(b.dataset.go);
+    });
+    document.body.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-go]');
+      if (!b) return;
+      go(b.dataset.go);
+    });
+    window.addEventListener('hashchange', () => go(location.hash.replace('#','') || 'home'));
+    go(location.hash.replace('#','') || 'home');
+
+    const commonIn = ["신분증 사본","진단서 또는 수술확인서","입퇴원확인서","진료비 계산서(원본)","진료세부내역서","의무기록 사본(진료기록지/수술·마취기록지 등)","통장 사본"];
+    const commonOut = ["신분증 사본","외래 진료 영수증(원본)","진료세부내역서","처방전 및 약제비 영수증(해당 시)","통장 사본"];
+    const data = {
+      traffic: { in: [...commonIn, "사고사실확인원 또는 경찰서 접수번호", "합의서/진술서(해당 시)"], out: [...commonOut, "사고사실확인원 또는 경찰서 접수번호"] },
+      disease: { in: [...commonIn], out: [...commonOut, "진단서/소견서(해당 시)"] },
+      injury:  { in: [...commonIn, "사고 경위서(간단히) 또는 사고사실확인"], out: [...commonOut, "사고 경위서(간단히) 또는 사고사실확인"] },
+    };
+    function renderList(id, items) {
+      const ul = document.getElementById(id);
+      ul.innerHTML = items.map(t => `<li><span class='check'>✓</span><span style='color:#334155;font-size:14px;'>${t}</span></li>`).join('');
+    }
+    renderList('traffic-list', data.traffic.in);
+    renderList('disease-list', data.disease.in);
+    renderList('injury-list', data.injury.in);
+    document.querySelectorAll('.tabs').forEach(group => {
+      group.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-tab]'); if(!btn) return;
+        group.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const kind = btn.dataset.tab, key = group.dataset.tabs;
+        const mapId = { traffic: 'traffic-list', disease: 'disease-list', injury: 'injury-list' };
+        renderList(mapId[key], data[key][kind]);
+      });
+    });
+    document.getElementById('consult-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      console.log('상담 문의 제출(데모)');
+      document.getElementById('submit-msg').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
